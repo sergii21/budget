@@ -46,13 +46,13 @@
 }
 
 .actions button:hover {
-  background-color: var(--color-primary-300);
+  background-color: var(--button-primary-hover);
 }
 
 .actions button:disabled {
-  background-color: var(--color-primary-100) !important;
+  background-color: var(--button-primary-inactive) !important;
 }
 
 .actions button[type='button']:hover {
-  background-color: var(--color-gray-100);
+  background-color: var(--button-primary-hover);
 }

@@ -19,7 +19,7 @@ export default function TransactionListWithData({ TransactionList }) {
       <Await resolve={transactions}>
         {(loadedTransactions) => (
           <SearchableList
-            className="mb-2 bg-root pl-4"
+            className="mb-2 pl-4"
             items={loadedTransactions}
             filterFn={filterTransactions}
           >

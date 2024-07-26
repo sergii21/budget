@@ -40,9 +40,9 @@ exports.createTransaction = async (req, res, next) => {
       budget,
       balance: balance - transaction.amount,
     };
-    await Budget.updateOne(newBudgetData);
+    await Budget.updateOne(newBudgetData);  
 
-    return res.status(201).json(transaction);
+    return res.status(201).json(transaction); 
   } catch (error) {
     return res.status(422).json({ message: "Validation errors." });
   }
