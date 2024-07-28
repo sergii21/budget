@@ -1,18 +1,16 @@
 import { BASE_URL } from "../utils/helper";
-import Header from "../components/ui/Header";
 import CurrentMonthBudgetEditable from "../components/budget/CurrentMonthBudgetEditable";
-import { json, redirect } from 'react-router-dom';
-
+import { json, redirect } from "react-router-dom";
+import HeaderWithBack from "../components/ui/HeaderWithBack";
 export default function IncomePage() {
   return (
     <>
-      <Header>Budgets planner</Header>
+      <HeaderWithBack>Budgets planner</HeaderWithBack>
 
       <CurrentMonthBudgetEditable></CurrentMonthBudgetEditable>
     </>
   );
 }
-
 
 export async function loader() {
   const response = await fetch(BASE_URL + "balance");
@@ -45,5 +43,5 @@ export async function action({ request }) {
   //   throw json({message: 'Could not save income.', status: 500})
   // }
 
-  return redirect('/');
+  return redirect("/");
 }
