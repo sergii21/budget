@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
+import Card from "../ui/Card";
 
-import TransactionItem from "./TransactionItem";
+export default function TransactionList({ transactions, TransactionItem }) {
 
-export default function TransactionList({ transactions }) {
   return (
-    <>
+    <Card className="mb-3">
       {transactions.map((t) => (
         <Link key={t._id} to={"/transactions/" + t._id}>
-          <TransactionItem {...t}></TransactionItem>
+          <TransactionItem className="p-2 pr-3" {...t}></TransactionItem>
         </Link>
       ))}
-    </>
+    </Card>
   );
 }

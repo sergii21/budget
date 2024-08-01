@@ -1,13 +1,11 @@
-import { Await, useLoaderData } from "react-router-dom";
-import { Suspense } from "react";
 import SearchableList from "../ui/SearchableList";
-import { BASE_URL } from "../../utils/helper";
-import { defer, json } from "react-router-dom";
-import { transactionTypes } from "./transactionTypes";
+import Awaited from "../ui/Awaited";
+import TransactionList from "./TransactionList";
+import {useTransaction} from '../../store/transactionContext'
 
-export default function TransactionListWithData({ TransactionList }) {
-  const { transactions } = useLoaderData();
-
+export default function TransactionListWithData(props) {
+const { transactions } = useTransaction();
+  
   function filterTransactions(transaction, searchTerm) {
     return JSON.stringify(transaction)
       .toLowerCase()
@@ -15,45 +13,18 @@ export default function TransactionListWithData({ TransactionList }) {
   }
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <Await resolve={transactions}>
-        {(loadedTransactions) => (
-          <SearchableList
-            className="mb-2 pl-4"
-            items={loadedTransactions}
-            filterFn={filterTransactions}
-          >
-            {(filteredTransactions) => (
-              <TransactionList transactions={filteredTransactions} />
-            )}
-          </SearchableList>
-        )}
-      </Await>
-    </Suspense>
+    <Awaited data={transactions}>
+      {(loadedTransactions) => (
+        <SearchableList
+          className="mb-3"
+          items={loadedTransactions}
+          filterFn={filterTransactions}
+        >
+          {(filteredTransactions) =>
+            <TransactionList transactions={filteredTransactions} {...props} />
+          }
+        </SearchableList>
+      )}
+    </Awaited>
   );
-}
-
-async function loadTransactions(transactionType) {
-  const transactionTypeParam = transactionType
-    ? `?type=${transactionType}`
-    : "";
-
-  const response = await fetch(
-    `${BASE_URL}transactions${transactionTypeParam}`
-  );
-
-  if (!response.ok) {
-    throw json({ message: "Can't load transactions.", status: 500 });
-  } else {
-    return await response.json();
-  }
-}
-
-export function loader({ request }) {
-  const [, planned] = transactionTypes;
-  const type = request.url.includes("planned-spents") && planned;
-
-  return defer({
-    transactions: loadTransactions(type),
-  });
 }

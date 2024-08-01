@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
-
-import classes from './form/form.module.css'
+import Input from './form/Input';
 
 export default function SearchableList({ items, children, filterFn, className }) {
   let lastChange = useRef();
@@ -16,16 +15,16 @@ export default function SearchableList({ items, children, filterFn, className })
     lastChange.current = setTimeout(() => {
       lastChange.current = null;
       setSearchTerm(event.target.value);
-    }, 500);
+    }, 200);
   }
   return (
     <>
-      <input
+      <Input
         type="search"
         placeholder="Search"
-        className={className +' '+classes.formInput}
+        className={className + " dark:bg-gray-800 border-0"}
         onChange={handleChange}
-      />
+      ></Input>
       {children(searchResults)}
     </>
   );

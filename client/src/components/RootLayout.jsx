@@ -1,5 +1,6 @@
 import { Outlet, useNavigation } from "react-router-dom";
-import MainNavigation from './navigation/MainNavigation';
+import MainNavigation from "./navigation/MainNavigation";
+import Spinner from "./ui/Spinner";
 
 export default function RootLayout() {
   const navigation = useNavigation();
@@ -7,7 +8,7 @@ export default function RootLayout() {
     <>
       <main className="m-4">
         <MainNavigation></MainNavigation>
-        {navigation.state === "loading" && "Loading..."}
+        {navigation.state === "loading" && <Spinner></Spinner>}
         <Outlet />
       </main>
     </>

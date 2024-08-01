@@ -9,29 +9,24 @@ import ErrorPage from "./pages/Error";
 import TransactionDetail from "./pages/TransactionDetail";
 import TransactionEdit from "./pages/TransactionEdit";
 
-import { loader as transactionsLoader } from "./components/transaction/TransactionListWithData";
-import {
-  action as budgetAction,
-  loader as currentBudgetLoader,
-} from "./pages/Budget";
+import { action as budgetAction } from "./pages/Budget";
 import {
   loader as transactionDetailLoader,
   action as deleteTransactionAction,
-} from "./pages/TransactionDetail"; 
+} from "./pages/TransactionDetail";
 import { action as editTransactionAction } from "./pages/TransactionEdit";
+import BudgetContextProvider from "./store/budgetContext";
+import TransactionContextProvider from "./store/transactionContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
-    id: "root",
-    loader: currentBudgetLoader,
     children: [
       {
         index: true,
         element: <HomePage />,
-        loader: transactionsLoader,
         action: editTransactionAction,
       },
       {
@@ -59,14 +54,19 @@ const router = createBrowserRouter([
       {
         path: "planned-spents",
         element: <PlannedSpentsPage />,
-        loader: transactionsLoader,
       },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <BudgetContextProvider>
+      <TransactionContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </TransactionContextProvider>
+    </BudgetContextProvider>
+  );
 }
 
 export default App;

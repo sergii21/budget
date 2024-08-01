@@ -1,15 +1,17 @@
-import CurrentMonthBudget from "../components/budget/CurrentMonthBudget";
+import Budget from "../components/budget/Budget";
 import NewTransactionItem from "../components/transaction/NewTransactionItem";
-import TransactionListContainer from '../components/transaction/TransactionListContainer';
+import TransactionListContainer from "../components/transaction/TransactionListContainer";
+import SectionHeader from "../components/ui/SectionHeader";
 
 export default function HomePage() {
   return (
     <>
-      <CurrentMonthBudget></CurrentMonthBudget>
+      <Budget></Budget>
 
       <NewTransactionItem />
-      
-      <TransactionListContainer/>
+
+      <SectionHeader>Casula transactions</SectionHeader>
+      <TransactionListContainer />
     </>
   );
 }

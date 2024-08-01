@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["es2020", "DOM"],
+    "jsx": "react-jsx",
+    "checkJs": true
+  },
+  "include": ["src/**/*.js", "src/**/*.jsx", "cypress/**/*.js"],
+  "exclude": ["node_modules"]
+}

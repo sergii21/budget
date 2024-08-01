@@ -10,9 +10,6 @@ function MainNavigation() {
             <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
-            <NavLink to={"/income"}>Income</NavLink>
-          </li>
-          <li>
             <NavLink to={"/planned-spents"}>Planned spents</NavLink>
           </li>
         </ul>

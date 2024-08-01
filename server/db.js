@@ -5,4 +5,4 @@ const connectDB = async () => {
     console.log(`DB connected ${conn.connection.host}`);
 }
 
-module.exports = connectDB;
+module.exports = connectDB;    

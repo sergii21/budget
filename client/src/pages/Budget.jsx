@@ -1,29 +1,15 @@
 import { BASE_URL } from "../utils/helper";
-import CurrentMonthBudgetEditable from "../components/budget/CurrentMonthBudgetEditable";
-import { json, redirect } from "react-router-dom";
+import BudgetForm from "../components/budget/BudgetForm";
+import { redirect } from "react-router-dom";
 import HeaderWithBack from "../components/ui/HeaderWithBack";
 export default function IncomePage() {
   return (
     <>
       <HeaderWithBack>Budgets planner</HeaderWithBack>
 
-      <CurrentMonthBudgetEditable></CurrentMonthBudgetEditable>
+      <BudgetForm></BudgetForm>
     </>
   );
-}
-
-export async function loader() {
-  const response = await fetch(BASE_URL + "balance");
-  if (!response.ok) {
-    throw json(
-      { message: "Could not fetch current balance." },
-      {
-        status: 500,
-      }
-    );
-  } else {
-    return response;
-  }
 }
 
 export async function action({ request }) {
